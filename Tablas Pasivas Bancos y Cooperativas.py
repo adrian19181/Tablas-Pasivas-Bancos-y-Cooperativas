@@ -14,11 +14,9 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-        #MainMenu {visibility: hidden;}
         footer {visibility: hidden;}
-        header {visibility: hidden;}
         .block-container {
-            padding-top: 0rem !important;
+            padding-top: 1rem !important;
             padding-bottom: 1rem !important;
             padding-left: 0.8rem !important;
             padding-right: 0.8rem !important;
