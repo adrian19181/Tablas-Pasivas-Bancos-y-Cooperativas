@@ -114,12 +114,16 @@ def generar_tabla_html(df):
 
   headers_html = ""
   for idx, col in enumerate(df_display.columns):
-    sticky_class = (
-        "position: sticky; left: 0; z-index: 50; background-color: #f0f2f6;"
-        if idx == 0
-        else "position: sticky; top: 0; z-index: 20; background-color:"
-        " #f0f2f6;"
-    )
+    if idx == 0:
+      sticky_class = (
+          "position: sticky !important; top: 0 !important; left: 0 !important;"
+          " z-index: 50 !important; background-color: #f0f2f6 !important;"
+      )
+    else:
+      sticky_class = (
+          "position: sticky !important; top: 0 !important; z-index: 20"
+          " !important; background-color: #f0f2f6 !important;"
+      )
     headers_html += f'<th style="padding: 10px; border: 1px solid #d0d7de; white-space: nowrap; width: max-content; text-align: center; font-weight: bold; color: #1f2328; {sticky_class}">{col}</th>'
 
   rows_html = ""
@@ -127,19 +131,23 @@ def generar_tabla_html(df):
     bg = "#ffffff" if r_idx % 2 == 0 else "#f8f9fa"
     cells_html = ""
     for c_idx, val in enumerate(row):
-      sticky_cell = (
-          f"position: sticky; left: 0; z-index: 30; background-color: {bg};"
-          " background-clip: padding-box; box-shadow: 2px 0 5px -2px"
-          " rgba(0,0,0,0.1);"
-          if c_idx == 0
-          else "position: static; z-index: auto;"
-      )
+      if c_idx == 0:
+        sticky_cell = (
+            f"position: sticky !important; left: 0 !important; z-index: 30"
+            f" !important; background-color: {bg} !important; background-clip:"
+            " padding-box !important; box-shadow: 2px 0 5px -2px"
+            " rgba(0,0,0,0.1);"
+        )
+      else:
+        sticky_cell = (
+            "position: static !important; z-index: auto !important;"
+        )
       cells_html += f'<td style="padding: 8px 12px; border: 1px solid #d0d7de; white-space: nowrap; width: max-content; text-align: center; color: #24292f; {sticky_cell}">{val}</td>'
     rows_html += f'<tr style="background-color: {bg};">{cells_html}</tr>'
 
   table_html = f"""
     <div style="overflow-x: auto; overflow-y: auto; max-height: 480px; padding: 0px; border: 1px solid #d0d7de; border-radius: 8px; margin-top: 10px; margin-bottom: 20px;">
-        <table style="width: 100%; border-collapse: collapse; font-family: sans-serif; font-size: 13px;">
+        <table style="width: 100%; border-collapse: separate; border-spacing: 0; font-family: sans-serif; font-size: 13px;">
             <thead>
                 <tr>{headers_html}</tr>
             </thead>
