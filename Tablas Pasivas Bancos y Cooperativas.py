@@ -17,7 +17,7 @@ st.markdown(
         footer {visibility: hidden;}
         .block-container {
             padding-top: 1rem !important;
-            padding-bottom: 1rem !important;
+            padding-bottom: 8rem !important;
             padding-left: 0.8rem !important;
             padding-right: 0.8rem !important;
         }
@@ -138,7 +138,7 @@ def generar_tabla_html(df):
     rows_html += f'<tr style="background-color: {bg};">{cells_html}</tr>'
 
   table_html = f"""
-    <div style="overflow-x: auto; overflow-y: auto; max-height: 480px; padding: 0px; border: 1px solid #d0d7de; border-radius: 8px; margin-top: 10px;">
+    <div style="overflow-x: auto; overflow-y: auto; max-height: 480px; padding: 0px; border: 1px solid #d0d7de; border-radius: 8px; margin-top: 10px; margin-bottom: 20px;">
         <table style="width: 100%; border-collapse: collapse; font-family: sans-serif; font-size: 13px;">
             <thead>
                 <tr>{headers_html}</tr>
@@ -186,6 +186,9 @@ try:
 
         tabla_html = generar_tabla_html(df_tabla)
         st.markdown(tabla_html, unsafe_allow_html=True)
+        st.markdown(
+            "<div style='height: 100px;'></div>", unsafe_allow_html=True
+        )
 
 except Exception as e:
   st.error(f"Error al conectar con Google Drive o procesar el archivo: {e}")
