@@ -115,39 +115,47 @@ def generar_tabla_html(df):
   headers_html = ""
   for idx, col in enumerate(df_display.columns):
     if idx == 0:
-      sticky_class = (
-          "position: sticky !important; top: 0 !important; left: 0 !important;"
-          " z-index: 50 !important; background-color: #f0f2f6 !important;"
+      sticky_style = (
+          "position: -webkit-sticky !important; position: sticky !important; "
+          "top: 0 !important; left: 0 !important; z-index: 50 !important; "
+          "background-color: #2b3035 !important; color: #ffffff !important; "
+          "background-clip: padding-box !important; "
+          "box-shadow: 2px 2px 5px rgba(0,0,0,0.3);"
       )
     else:
-      sticky_class = (
-          "position: sticky !important; top: 0 !important; z-index: 20"
-          " !important; background-color: #f0f2f6 !important;"
+      sticky_style = (
+          "position: -webkit-sticky !important; position: sticky !important; "
+          "top: 0 !important; z-index: 20 !important; "
+          "background-color: #2b3035 !important; color: #ffffff !important; "
+          "background-clip: padding-box !important;"
       )
-    headers_html += f'<th style="padding: 10px; border: 1px solid #d0d7de; white-space: nowrap; width: max-content; text-align: center; font-weight: bold; color: #1f2328; {sticky_class}">{col}</th>'
+    headers_html += f'<th style="padding: 10px 14px; border: 1px solid #444c56; white-space: nowrap; width: max-content; min-width: 110px; text-align: center; font-weight: bold; font-size: 13px; {sticky_style}">{col}</th>'
 
   rows_html = ""
   for r_idx, (_, row) in enumerate(df_display.iterrows()):
-    bg = "#ffffff" if r_idx % 2 == 0 else "#f8f9fa"
+    bg_color = "#1e2227" if r_idx % 2 == 0 else "#252a30"
     cells_html = ""
     for c_idx, val in enumerate(row):
       if c_idx == 0:
         sticky_cell = (
-            f"position: sticky !important; left: 0 !important; z-index: 30"
-            f" !important; background-color: {bg} !important; background-clip:"
-            " padding-box !important; box-shadow: 2px 0 5px -2px"
-            " rgba(0,0,0,0.1);"
+            "position: -webkit-sticky !important; position: sticky !important;"
+            " left: 0 !important; z-index: 30 !important; "
+            f"background-color: {bg_color} !important; color: #f0f6fc"
+            " !important; background-clip: padding-box !important; box-shadow:"
+            " 2px 0 5px -2px rgba(0,0,0,0.4);"
         )
       else:
         sticky_cell = (
-            "position: static !important; z-index: auto !important;"
+            "position: static !important; z-index: auto !important; "
+            f"background-color: {bg_color} !important; color: #f0f6fc"
+            " !important;"
         )
-      cells_html += f'<td style="padding: 8px 12px; border: 1px solid #d0d7de; white-space: nowrap; width: max-content; text-align: center; color: #24292f; {sticky_cell}">{val}</td>'
-    rows_html += f'<tr style="background-color: {bg};">{cells_html}</tr>'
+      cells_html += f'<td style="padding: 10px 14px; border: 1px solid #373e47; white-space: nowrap; width: max-content; text-align: center; font-size: 13px; {sticky_cell}">{val}</td>'
+    rows_html += f"<tr>{cells_html}</tr>"
 
   table_html = f"""
-    <div style="overflow-x: auto; overflow-y: auto; max-height: 480px; padding: 0px; border: 1px solid #d0d7de; border-radius: 8px; margin-top: 10px; margin-bottom: 20px;">
-        <table style="width: 100%; border-collapse: separate; border-spacing: 0; font-family: sans-serif; font-size: 13px;">
+    <div style="overflow-x: auto !important; overflow-y: auto !important; max-height: 480px; width: 100%; padding: 0px; border: 1px solid #373e47; border-radius: 8px; margin-top: 10px; margin-bottom: 25px;">
+        <table style="width: 100%; border-collapse: separate !important; border-spacing: 0 !important; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
             <thead>
                 <tr>{headers_html}</tr>
             </thead>
